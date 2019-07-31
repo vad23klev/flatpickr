@@ -7,7 +7,7 @@
   function rangePlugin(config) {
       if (config === void 0) { config = {}; }
       return function (fp) {
-          var dateFormat = "", secondInput, _secondInputFocused, _prevDates, wrapper;
+          var dateFormat = "", secondInput, _secondInputFocused, _prevDates, wrapper, toggler;
           var createSecondInput = function () {
               if (config.input) {
                   secondInput =
@@ -31,11 +31,15 @@
               }
               if (fp.config.wrap && wrapper) {
                   wrapper = secondInput;
-                  ["open", "close", "toggle", "clear"].forEach(function (evt) {
-                      Array.prototype.forEach.call(wrapper.querySelectorAll("[data-" + evt + "]"), function (el) {
-                          return fp._bind(el, "click", fp[evt]);
+                  toggler = wrapper.querySelector("[data-toggle]");
+                  console.log(toggler);
+                  if (toggler) {
+                      fp._bind(toggler, ["click"], function (e) {
+                          e.preventDefault();
+                          console.log(toggler);
+                          fp.toggle();
                       });
-                  });
+                  }
               }
               if (secondInput.value) {
                   var parsedDate = fp.parseDate(secondInput.value);

@@ -17,7 +17,8 @@ function rangePlugin(config: Config = {}): Plugin {
       secondInput: HTMLInputElement,
       _secondInputFocused: boolean,
       _prevDates: Date[],
-      wrapper: HTMLElement;
+      wrapper: HTMLElement,
+      toggler: HTMLElement;
 
     const createSecondInput = () => {
       if (config.input) {
@@ -45,17 +46,15 @@ function rangePlugin(config: Config = {}): Plugin {
       }
       if (fp.config.wrap && wrapper) {
         wrapper = secondInput;
-        ["open", "close", "toggle", "clear"].forEach(evt => {
-          Array.prototype.forEach.call(
-            wrapper.querySelectorAll(`[data-${evt}]`),
-            (el: HTMLElement) =>
-            fp._bind(
-                el,
-                "click",
-                fp[evt as "open" | "close" | "toggle" | "clear"]
-              )
-          );
-        });
+        toggler = wrapper.querySelector("[data-toggle]") as HTMLElement;
+        console.log(toggler);
+        if (toggler) {
+          fp._bind(toggler, ["click"], (e: MouseEvent) => {
+            e.preventDefault();
+            console.log(toggler);
+            fp.toggle();
+          });
+        }
       }
 
       if (secondInput.value) {
