@@ -46,6 +46,7 @@ function rangePlugin(config: Config = {}): Plugin {
       if (fp.config.wrap && wrapper) {
         toggler = wrapper.querySelector("[data-toggle]") as HTMLElement;
         if (toggler) {
+          fp.config.ignoredFocusElements.push(toggler);
           fp._bind(toggler, "click", fp['toggle']);
         }
       }
@@ -107,6 +108,7 @@ function rangePlugin(config: Config = {}): Plugin {
 
       onReady() {
         createSecondInput();
+        console.log(secondInput);
         fp.config.ignoredFocusElements.push(secondInput);
         if (fp.config.allowInput) {
           fp._input.removeAttribute("readonly");

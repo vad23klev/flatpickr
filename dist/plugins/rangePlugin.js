@@ -31,6 +31,7 @@
               if (fp.config.wrap && wrapper) {
                   toggler = wrapper.querySelector("[data-toggle]");
                   if (toggler) {
+                      fp.config.ignoredFocusElements.push(toggler);
                       fp._bind(toggler, "click", fp['toggle']);
                   }
               }
@@ -75,6 +76,7 @@
               },
               onReady: function () {
                   createSecondInput();
+                  console.log(secondInput);
                   fp.config.ignoredFocusElements.push(secondInput);
                   if (fp.config.allowInput) {
                       fp._input.removeAttribute("readonly");
