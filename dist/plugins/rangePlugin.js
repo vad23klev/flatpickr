@@ -31,15 +31,7 @@
               if (fp.config.wrap && wrapper) {
                   toggler = wrapper.querySelector("[data-toggle]");
                   if (toggler) {
-                      fp._bind(toggler, "click", function () {
-                          if (fp.isOpen) {
-                              fp.close();
-                          }
-                          else {
-                              fp.isOpen = false;
-                              fp.open(undefined, config.position === "left" ? fp._input : secondInput);
-                          }
-                      });
+                      fp._bind(toggler, "click", fp['toggle']);
                   }
               }
               if (secondInput.value) {

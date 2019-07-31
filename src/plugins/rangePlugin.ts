@@ -46,17 +46,7 @@ function rangePlugin(config: Config = {}): Plugin {
       if (fp.config.wrap && wrapper) {
         toggler = wrapper.querySelector("[data-toggle]") as HTMLElement;
         if (toggler) {
-          fp._bind(toggler, "click", () => {
-            if(fp.isOpen) {
-              fp.close();
-            } else {
-              fp.isOpen = false;
-              fp.open(
-                undefined,
-                config.position === "left" ? fp._input : secondInput
-              );
-            }
-          });
+          fp._bind(toggler, "click", fp['toggle']);
         }
       }
 
