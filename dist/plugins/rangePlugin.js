@@ -20,6 +20,7 @@
                   }
                   if (fp.config.wrap) {
                       wrapper = secondInput;
+                      console.log(wrapper);
                       secondInput = secondInput.querySelector("[data-input]");
                   }
               }
