@@ -45,7 +45,6 @@ function rangePlugin(config: Config = {}): Plugin {
         secondInput._flatpickr = undefined;
       }
       if (fp.config.wrap && wrapper) {
-        wrapper = secondInput;
         toggler = wrapper.querySelector("[data-toggle]") as HTMLElement;
         console.log(toggler);
         if (toggler) {

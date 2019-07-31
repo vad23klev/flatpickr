@@ -30,7 +30,6 @@
                   secondInput._flatpickr = undefined;
               }
               if (fp.config.wrap && wrapper) {
-                  wrapper = secondInput;
                   toggler = wrapper.querySelector("[data-toggle]");
                   console.log(toggler);
                   if (toggler) {
