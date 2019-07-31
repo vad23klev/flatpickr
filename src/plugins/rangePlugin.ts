@@ -16,7 +16,8 @@ function rangePlugin(config: Config = {}): Plugin {
     let dateFormat = "",
       secondInput: HTMLInputElement,
       _secondInputFocused: boolean,
-      _prevDates: Date[];
+      _prevDates: Date[],
+      wrapper: HTMLElement;
 
     const createSecondInput = () => {
       if (config.input) {
@@ -31,6 +32,7 @@ function rangePlugin(config: Config = {}): Plugin {
         }
 
         if (fp.config.wrap) {
+          wrapper = secondInput;
           secondInput = secondInput.querySelector(
             "[data-input]"
           ) as HTMLInputElement;
@@ -39,6 +41,20 @@ function rangePlugin(config: Config = {}): Plugin {
         secondInput = fp._input.cloneNode() as HTMLInputElement;
         secondInput.removeAttribute("id");
         secondInput._flatpickr = undefined;
+      }
+      if (fp.config.wrap && wrapper) {
+        wrapper = secondInput;
+        ["open", "close", "toggle", "clear"].forEach(evt => {
+          Array.prototype.forEach.call(
+            wrapper.querySelectorAll(`[data-${evt}]`),
+            (el: HTMLElement) =>
+            fp._bind(
+                el,
+                "click",
+                fp[evt as "open" | "close" | "toggle" | "clear"]
+              )
+          );
+        });
       }
 
       if (secondInput.value) {
@@ -112,7 +128,7 @@ function rangePlugin(config: Config = {}): Plugin {
           _secondInputFocused = false;
           fp.jumpToDate(fp.selectedDates[0]);
         });
-
+        
         if (fp.config.allowInput)
           fp._bind(fp._input, "keydown", (e: KeyboardEvent) => {
             if ((e as KeyboardEvent).key === "Enter")
