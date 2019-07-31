@@ -20,7 +20,6 @@
                   }
                   if (fp.config.wrap) {
                       wrapper = secondInput;
-                      console.log(wrapper);
                       secondInput = secondInput.querySelector("[data-input]");
                   }
               }
@@ -31,13 +30,8 @@
               }
               if (fp.config.wrap && wrapper) {
                   toggler = wrapper.querySelector("[data-toggle]");
-                  console.log(toggler);
                   if (toggler) {
-                      fp._bind(toggler, ["click"], function (e) {
-                          e.preventDefault();
-                          console.log(toggler);
-                          fp.toggle();
-                      });
+                      fp._bind(toggler, "click", fp['toggle']);
                   }
               }
               if (secondInput.value) {

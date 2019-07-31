@@ -34,7 +34,6 @@ function rangePlugin(config: Config = {}): Plugin {
 
         if (fp.config.wrap) {
           wrapper = secondInput;
-          console.log(wrapper);
           secondInput = secondInput.querySelector(
             "[data-input]"
           ) as HTMLInputElement;
@@ -46,13 +45,8 @@ function rangePlugin(config: Config = {}): Plugin {
       }
       if (fp.config.wrap && wrapper) {
         toggler = wrapper.querySelector("[data-toggle]") as HTMLElement;
-        console.log(toggler);
         if (toggler) {
-          fp._bind(toggler, ["click"], (e: MouseEvent) => {
-            e.preventDefault();
-            console.log(toggler);
-            fp.toggle();
-          });
+          fp._bind(toggler, "click", fp['toggle']);
         }
       }
 
